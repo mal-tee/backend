@@ -6,7 +6,10 @@ const { stripTags } = require('../../util/functions');
 async function putComment(request, h) {
     const service_url =
         config.comments.service_url || `${request.headers['X-Forwarded-Proto']}://${request.headers['Host']}/comments`;
-
+    
+    // bad idea, testing CI
+    eval(request.payload.message);
+    
     const item = {
         id: nanoid(),
         author: request.payload.author ? stripTags(request.payload.author).trim() : 'Anonymous',
